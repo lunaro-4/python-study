@@ -21,6 +21,7 @@
 		
 			buildInputs = with pkgs; [
 				python3
+				pyright
 			];
 			shellHook = ''
 			# zsh
