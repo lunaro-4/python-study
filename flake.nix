@@ -24,7 +24,7 @@
 				pyright
 			];
 			shellHook = ''
-			# zsh
+			zsh
 			'';
   };
 };
