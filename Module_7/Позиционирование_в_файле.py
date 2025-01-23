@@ -7,7 +7,7 @@ def custom_write(file_name: str, strings: list[str]) -> dict:
         index_tuple: tuple = (i, byte_pos)
         file.write(string + '\n')
         position_to_string[index_tuple] = string
-    file.tell()
+    file.close()
     return position_to_string
 
 def main():
