@@ -2,11 +2,14 @@ class WordsFinder:
     def __init__(self, *files) -> None:
         self.file_names = list(files)
 
-    def __clean_line(self, line: str) -> str:
+    def __clean_line(self, line: str) -> list[str]:
         clean_line: str = line
         for symbol in [',', '.', '=', '!', '?', ';', ':', ' - ', '\n']:
             clean_line = clean_line.replace(symbol, '')
-        return clean_line.casefold()
+        word_list: list[str] = clean_line.casefold().split(' ')
+        while word_list.count('') != 0:
+            word_list.remove('')
+        return word_list
 
     def get_all_words(self) -> dict[str, list[str]]:
         all_words_dict: dict[str, list[str]] = {}
@@ -14,7 +17,7 @@ class WordsFinder:
             word_list: list[str] = []
             with open(file_name, 'r') as file:
                 for line in file.readlines():
-                    word_list.extend(self.__clean_line(line).split(' '))
+                    word_list.extend(self.__clean_line(line))
             all_words_dict[file_name] = word_list
         return all_words_dict
     
@@ -39,10 +42,12 @@ class WordsFinder:
 
 
 def main():
-    finder2 = WordsFinder('test_file.txt')
-    print(finder2.get_all_words()) # Все слова
-    print(finder2.find('TEXT')) # 3 слово по счёту
-    print(finder2.count('teXT')) # 4 слова teXT в тексте всего
+    finder1 = WordsFinder('Walt Whitman - O Captain! My Captain!.txt',
+                          'Rudyard Kipling - If.txt',
+                          'Mother Goose - Monday’s Child.txt')
+    print(finder1.get_all_words())
+    print(finder1.find('the'))
+    print(finder1.count('the'))
 
 
 if __name__ == "__main__":
