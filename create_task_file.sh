@@ -6,7 +6,7 @@ if [ $# -le 1 ]; then
 	exit 1
 fi
 
-TASK_NAME=$(echo "$2" | sed -e 's/ /_/g' | sed -e 's/[.,]//g')
+TASK_NAME=$(echo "$2" | sed -e 's/ /_/g' | sed -e "s/[.,']//g")
 
 touch "Module_$1/$TASK_NAME.py"
 
